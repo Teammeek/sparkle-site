@@ -1,0 +1,53 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sparkle</title>
+  <style>
+    :root {
+      --ink: #0f172a;
+      --muted: #475569;
+      --teal: #1d8f8a;
+      --mint: #9ddfd9;
+      --sand: #f3d48b;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --line: #d7e0ea;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: var(--bg); color: var(--ink); }
+    .page { min-height: 100vh; position: relative; overflow: hidden; padding: 48px 24px; }
+    .circle-a, .circle-b { position: absolute; border-radius: 50%; opacity: 0.75; pointer-events: none; }
+    .circle-a { width: 280px; height: 280px; top: -48px; right: 72px; background: var(--mint); }
+    .circle-b { width: 220px; height: 220px; top: 72px; right: -32px; background: var(--sand); }
+    .wrap { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; }
+    .brand { color: var(--teal); font-weight: 700; font-size: 32px; margin-bottom: 12px; }
+    h1 { font-size: clamp(40px, 8vw, 72px); line-height: 0.98; margin: 0 0 12px; font-weight: 800; letter-spacing: -0.03em; max-width: 760px; }
+    .sub { color: var(--muted); font-size: 20px; line-height: 1.5; max-width: 720px; margin: 0 0 32px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 28px; box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06); max-width: 760px; }
+    .list { margin: 0; padding-left: 20px; color: var(--muted); font-size: 18px; line-height: 1.7; }
+    .link { display: inline-block; margin-top: 28px; background: var(--teal); color: #fff; text-decoration: none; padding: 14px 22px; border-radius: 999px; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="circle-a"></div>
+    <div class="circle-b"></div>
+    <div class="wrap">
+      <div class="brand">Sparkle</div>
+      <h1>Operational data, cleaned into business-ready structure.</h1>
+      <p class="sub">Sparkle standardizes messy operational datasets, surfaces quality risk, enriches business context, and prepares delivery-grade outputs.</p>
+      <section class="card">
+        <ul class="list">
+          <li>Operational Data Cleanup</li>
+          <li>Data Validation &amp; Integrity Checks</li>
+          <li>Business Insight Enrichment</li>
+          <li>Client-Ready Data Structuring</li>
+        </ul>
+        <a class="link" href="https://github.com/Teammeek/sparkle">View Project</a>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
