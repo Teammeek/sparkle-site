@@ -227,7 +227,9 @@
     .service-grid,
     .audience-grid,
     .step-grid,
-    .trust-grid {
+    .trust-grid,
+    .flow-grid,
+    .faq-grid {
       display: grid;
       gap: 18px;
     }
@@ -248,17 +250,29 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
+    .flow-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .faq-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .service-card,
     .audience-card,
     .step-card,
-    .trust-card {
+    .trust-card,
+    .flow-card,
+    .faq-card {
       padding: 22px;
     }
 
     .service-card h3,
     .audience-card h3,
     .step-card h3,
-    .trust-card h3 {
+    .trust-card h3,
+    .flow-card h3,
+    .faq-card h3 {
       margin: 0 0 10px;
       font-size: 1.04rem;
     }
@@ -266,11 +280,34 @@
     .service-card p,
     .audience-card p,
     .step-card p,
-    .trust-card p {
+    .trust-card p,
+    .flow-card p,
+    .faq-card p {
       margin: 0;
       color: var(--muted);
       line-height: 1.66;
       font-size: 0.98rem;
+    }
+
+    .flow-card,
+    .faq-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.06);
+    }
+
+    .flow-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--teal-dark);
+      font-weight: 800;
+      margin-bottom: 12px;
     }
 
     .proof-grid {
@@ -342,7 +379,9 @@
       .service-grid,
       .audience-grid,
       .step-grid,
-      .trust-grid {
+      .trust-grid,
+      .flow-grid,
+      .faq-grid {
         grid-template-columns: 1fr;
       }
 
@@ -398,11 +437,12 @@
         <div class="hero-grid">
           <div>
             <div class="eyebrow">Business-ready data operations</div>
-            <h1>Messy operational data should not be running your business.</h1>
+            <h1>Operational data should be ready for decisions, not constant repair.</h1>
             <p class="hero-copy">
-              Sparkle cleans inconsistent records, validates data integrity,
-              enriches business meaning, and structures final outputs your team
-              can actually use for reporting, review, and delivery.
+              Sparkle transforms messy spreadsheets and CSVs into cleaner,
+              traceable, business-ready outputs through operational cleanup,
+              integrity validation, business insight enrichment, and final
+              structuring for reporting and delivery.
             </p>
             <div class="hero-actions">
               <a class="button" href="#proof">See sample outputs</a>
@@ -449,19 +489,19 @@
         <div class="service-grid">
           <article class="service-card">
             <h3>Operational Data Cleanup</h3>
-            <p>Fixes dates, identifiers, mapped values, blanks, duplicates, and presentation-level inconsistency without inventing data.</p>
+            <p>Corrects dates, identifiers, mapped values, blanks, duplicates, and format inconsistency without inventing data.</p>
           </article>
           <article class="service-card">
             <h3>Data Validation &amp; Integrity Checks</h3>
-            <p>Flags errors, warnings, and review-needed records so bad data does not quietly move downstream.</p>
+            <p>Flags errors, warnings, and review-needed records so unreliable data does not quietly pass into business reporting.</p>
           </article>
           <article class="service-card">
             <h3>Business Insight Enrichment</h3>
-            <p>Adds derived columns and mapped business labels that improve analysis, segmentation, and reporting usefulness.</p>
+            <p>Adds derived columns and mapped business labels that improve analysis, segmentation, and management visibility.</p>
           </article>
           <article class="service-card">
             <h3>Client-Ready Structuring</h3>
-            <p>Shapes the final output into a cleaner delivery package with business-facing dashboards and structured datasets.</p>
+            <p>Shapes final outputs into cleaner delivery-ready datasets and business-facing dashboards.</p>
           </article>
         </div>
       </div>
@@ -479,15 +519,49 @@
         <div class="audience-grid">
           <article class="audience-card">
             <h3>SMEs and operators</h3>
-            <p>Sales, customer, inventory, procurement, and other operational datasets that need cleaning and business-ready structure.</p>
+            <p>Sales, customer, inventory, procurement, and other operational datasets that need clarity before reporting or delivery.</p>
           </article>
           <article class="audience-card">
             <h3>Schools and admin teams</h3>
-            <p>Fees, attendance, exams, and enrollment data that need integrity checks, review signals, and cleaner reporting outputs.</p>
+            <p>Fees, attendance, exams, and enrollment data that need stronger quality control and more reliable operational reporting.</p>
           </article>
           <article class="audience-card">
             <h3>Agro and production teams</h3>
-            <p>Production, field operations, inventory, and produce-sales data that need clarity before management decisions.</p>
+            <p>Production, field operations, inventory, and produce-sales data that need cleaner structure before management decisions.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <div class="section-head">
+          <h2>How Sparkle works</h2>
+          <p>
+            Sparkle follows a connected data journey so each stage improves the
+            dataset and prepares it for the next business use.
+          </p>
+        </div>
+        <div class="flow-grid">
+          <article class="flow-card">
+            <div class="flow-number">1</div>
+            <h3>Collect the job</h3>
+            <p>The dataset and business need are identified clearly before any processing begins.</p>
+          </article>
+          <article class="flow-card">
+            <div class="flow-number">2</div>
+            <h3>Clean and validate</h3>
+            <p>Operational issues are corrected where safe, then integrity checks surface errors and warnings.</p>
+          </article>
+          <article class="flow-card">
+            <div class="flow-number">3</div>
+            <h3>Enrich and structure</h3>
+            <p>Business fields are added and the final output is shaped into a more usable reporting-ready dataset.</p>
+          </article>
+          <article class="flow-card">
+            <div class="flow-number">4</div>
+            <h3>Deliver with proof</h3>
+            <p>The dataset is delivered alongside visual outputs that make the result easier to trust and explain.</p>
           </article>
         </div>
       </div>
@@ -554,19 +628,19 @@
         <div class="step-grid">
           <article class="step-card">
             <h3>1. Intake</h3>
-            <p>You share the dataset and the business context around what the output needs to support.</p>
+            <p>You share the dataset and the business context around what the final output needs to support.</p>
           </article>
           <article class="step-card">
             <h3>2. Processing</h3>
-            <p>Sparkle cleans, validates, enriches, and structures the dataset in the right sequence for the job.</p>
+            <p>Sparkle runs the dataset through the right processing path for cleanup, integrity checks, enrichment, and structuring.</p>
           </article>
           <article class="step-card">
             <h3>3. Review</h3>
-            <p>Weak records, integrity findings, and business-facing signals are surfaced clearly for follow-up.</p>
+            <p>Weak records, validation findings, and business-facing signals are surfaced clearly for review and follow-up.</p>
           </article>
           <article class="step-card">
             <h3>4. Delivery</h3>
-            <p>You receive structured outputs and dashboards that are easier to trust, explain, and work with.</p>
+            <p>You receive structured outputs and dashboards that are easier to trust, explain, and use in decision-making.</p>
           </article>
         </div>
       </div>
@@ -584,15 +658,45 @@
         <div class="trust-grid">
           <article class="trust-card">
             <h3>Truth-first outputs</h3>
-            <p>Dashboards and stage outputs are tied to actual runtime evidence, not invented examples.</p>
+            <p>Dashboards and stage outputs are tied to actual runtime evidence, not decorative guesses or invented samples.</p>
           </article>
           <article class="trust-card">
             <h3>Connected run journeys</h3>
-            <p>Cleanup, validation, enrichment, structuring, reporting, and delivery stay connected across the same job flow.</p>
+            <p>Cleanup, validation, enrichment, structuring, reporting, and delivery remain connected across the same job flow.</p>
           </article>
           <article class="trust-card">
             <h3>Controlled publication</h3>
-            <p>Client-facing artifacts appear only when the delivery journey has actually reached the right point.</p>
+            <p>Client-facing artifacts appear only when the delivery journey has actually reached the right stage.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <h2>FAQ</h2>
+          <p>
+            A few simple answers for teams considering Sparkle for operational
+            data cleanup and delivery support.
+          </p>
+        </div>
+        <div class="faq-grid">
+          <article class="faq-card">
+            <h3>What kind of files can Sparkle work with?</h3>
+            <p>Sparkle is designed around spreadsheet and CSV-style operational datasets that need cleanup, integrity checks, enrichment, and delivery-ready structure.</p>
+          </article>
+          <article class="faq-card">
+            <h3>Is Sparkle only for sales data?</h3>
+            <p>No. Sparkle supports multiple operational families including SME, school, and agro-style datasets where data quality affects business use.</p>
+          </article>
+          <article class="faq-card">
+            <h3>Does Sparkle just clean data?</h3>
+            <p>No. Cleanup is only one stage. Sparkle also validates integrity, enriches business meaning, structures final outputs, and supports dashboard-ready delivery.</p>
+          </article>
+          <article class="faq-card">
+            <h3>How do we request the service?</h3>
+            <p>You can start with WhatsApp on 09028878850 or email sparkledata001@gmail.com with a short note about the dataset and what output you need.</p>
           </article>
         </div>
       </div>
@@ -610,9 +714,7 @@
             <a class="button" href="https://wa.me/2349028878850">WhatsApp 09028878850</a>
             <a class="button-secondary" href="mailto:sparkledata001@gmail.com">sparkledata001@gmail.com</a>
           </div>
-          <div class="footer-note">
-            A request form would be for service inquiry later, not for user sign-up.
-          </div>
+          <div class="footer-note">Sparkle project by Team Meek</div>
         </div>
       </div>
     </section>
