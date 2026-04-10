@@ -1,53 +1,569 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sparkle</title>
+  <meta
+    name="description"
+    content="Sparkle turns messy operational datasets into business-ready outputs through cleanup, validation, enrichment, and structuring."
+  >
   <style>
     :root {
       --ink: #0f172a;
-      --muted: #475569;
+      --muted: #516074;
       --teal: #1d8f8a;
-      --mint: #9ddfd9;
-      --sand: #f3d48b;
-      --bg: #f8fafc;
+      --teal-dark: #136a66;
+      --mint: rgba(157, 223, 217, 0.86);
+      --sand: rgba(243, 212, 139, 0.84);
+      --bg: #f6f8fb;
       --card: #ffffff;
-      --line: #d7e0ea;
+      --line: #d9e2ec;
+      --navy: #101a31;
     }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: var(--bg); color: var(--ink); }
-    .page { min-height: 100vh; position: relative; overflow: hidden; padding: 48px 24px; }
-    .circle-a, .circle-b { position: absolute; border-radius: 50%; opacity: 0.75; pointer-events: none; }
-    .circle-a { width: 280px; height: 280px; top: -48px; right: 72px; background: var(--mint); }
-    .circle-b { width: 220px; height: 220px; top: 72px; right: -32px; background: var(--sand); }
-    .wrap { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; }
-    .brand { color: var(--teal); font-weight: 700; font-size: 32px; margin-bottom: 12px; }
-    h1 { font-size: clamp(40px, 8vw, 72px); line-height: 0.98; margin: 0 0 12px; font-weight: 800; letter-spacing: -0.03em; max-width: 760px; }
-    .sub { color: var(--muted); font-size: 20px; line-height: 1.5; max-width: 720px; margin: 0 0 32px; }
-    .card { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 28px; box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06); max-width: 760px; }
-    .list { margin: 0; padding-left: 20px; color: var(--muted); font-size: 18px; line-height: 1.7; }
-    .link { display: inline-block; margin-top: 28px; background: var(--teal); color: #fff; text-decoration: none; padding: 14px 22px; border-radius: 999px; font-weight: 700; }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(180deg, #fbfdff 0%, #f6f8fb 42%, #eef4f7 100%);
+      color: var(--ink);
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+    }
+
+    .circle-a,
+    .circle-b {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .circle-a {
+      width: 380px;
+      height: 380px;
+      top: -82px;
+      right: 84px;
+      background: var(--mint);
+    }
+
+    .circle-b {
+      width: 280px;
+      height: 280px;
+      top: 86px;
+      right: -26px;
+      background: var(--sand);
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      padding: 34px 0 54px;
+    }
+
+    .brand {
+      color: var(--teal);
+      font-weight: 800;
+      font-size: 2rem;
+      margin-bottom: 18px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(29, 143, 138, 0.1);
+      color: var(--teal-dark);
+      border: 1px solid rgba(29, 143, 138, 0.16);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.8rem, 5.6vw, 5rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      max-width: 11ch;
+    }
+
+    .hero-copy {
+      margin: 22px 0 0;
+      max-width: 600px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.72;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .button,
+    .button-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .button {
+      background: var(--teal);
+      color: #fff;
+      box-shadow: 0 18px 32px rgba(29, 143, 138, 0.22);
+    }
+
+    .button-secondary {
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    .button:hover,
+    .button-secondary:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero-panel {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(217, 226, 236, 0.9);
+      border-radius: 28px;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
+    }
+
+    .hero-panel h2 {
+      margin: 0 0 18px;
+      font-size: 1.15rem;
+    }
+
+    .signal-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .signal {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .signal span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+    }
+
+    .signal strong {
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 560px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .service-card,
+    .visual-card,
+    .trust-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.06);
+    }
+
+    .service-card {
+      padding: 22px;
+    }
+
+    .service-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.06rem;
+    }
+
+    .service-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.98rem;
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .visual-card {
+      overflow: hidden;
+    }
+
+    .visual-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #eef4f7;
+    }
+
+    .visual-meta {
+      padding: 16px 18px 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .visual-meta h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+
+    .visual-meta p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.6;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .trust-card {
+      padding: 22px;
+    }
+
+    .trust-card h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .trust-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.66;
+    }
+
+    .cta {
+      padding: 18px 0 70px;
+    }
+
+    .cta-panel {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 28px;
+      padding: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      box-shadow: 0 22px 40px rgba(16, 26, 49, 0.22);
+    }
+
+    .cta-panel h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      letter-spacing: -0.03em;
+    }
+
+    .cta-panel p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .service-grid,
+      .trust-grid,
+      .visual-grid,
+      .cta-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .circle-a {
+        width: 260px;
+        height: 260px;
+        right: 34px;
+      }
+
+      .circle-b {
+        width: 190px;
+        height: 190px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding-top: 28px;
+      }
+
+      .container {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .hero,
+      .section {
+        padding: 24px 0;
+      }
+
+      .cta {
+        padding-bottom: 42px;
+      }
+
+      .cta-panel {
+        padding: 24px;
+      }
+    }
   </style>
 </head>
 <body>
   <main class="page">
     <div class="circle-a"></div>
     <div class="circle-b"></div>
-    <div class="wrap">
-      <div class="brand">Sparkle</div>
-      <h1>Operational data, cleaned into business-ready structure.</h1>
-      <p class="sub">Sparkle standardizes messy operational datasets, surfaces quality risk, enriches business context, and prepares delivery-grade outputs.</p>
-      <section class="card">
-        <ul class="list">
-          <li>Operational Data Cleanup</li>
-          <li>Data Validation &amp; Integrity Checks</li>
-          <li>Business Insight Enrichment</li>
-          <li>Client-Ready Data Structuring</li>
-        </ul>
-        <a class="link" href="https://github.com/Teammeek/sparkle">View Project</a>
-      </section>
-    </div>
+
+    <section class="hero">
+      <div class="container">
+        <div class="brand">Sparkle</div>
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Business-ready data operations</div>
+            <h1>From messy operational data to decision-ready outputs.</h1>
+            <p class="hero-copy">
+              Sparkle cleans inconsistent records, flags integrity risk,
+              enriches business meaning, and structures delivery-grade datasets
+              and dashboards for real business use.
+            </p>
+            <div class="hero-actions">
+              <a class="button" href="#visuals">See the visuals</a>
+              <a class="button-secondary" href="https://github.com/Teammeek/sparkle">Private project repo</a>
+            </div>
+          </div>
+
+          <aside class="hero-panel">
+            <h2>What Sparkle delivers</h2>
+            <div class="signal-list">
+              <div class="signal">
+                <span>Cleanup</span>
+                <strong>Standardized values, corrected formats, and duplicate-safe outputs.</strong>
+              </div>
+              <div class="signal">
+                <span>Validation</span>
+                <strong>Integrity findings that separate quality issues from trusted records.</strong>
+              </div>
+              <div class="signal">
+                <span>Enrichment</span>
+                <strong>Business insight fields that make the dataset more useful for reporting.</strong>
+              </div>
+              <div class="signal">
+                <span>Structuring</span>
+                <strong>Client-ready datasets and dashboards aligned to the final delivery journey.</strong>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Service flow</h2>
+          <p>
+            Sparkle is designed as a connected operational journey, not a loose
+            collection of scripts. Each stage moves the dataset closer to a
+            business-ready outcome.
+          </p>
+        </div>
+        <div class="service-grid">
+          <article class="service-card">
+            <h3>Operational Data Cleanup</h3>
+            <p>Fixes whitespace, dates, identifiers, mapped values, and duplicate-heavy rows without inventing data.</p>
+          </article>
+          <article class="service-card">
+            <h3>Data Validation &amp; Integrity Checks</h3>
+            <p>Flags errors, warnings, and review-needed records so weak inputs do not quietly pass into reporting.</p>
+          </article>
+          <article class="service-card">
+            <h3>Business Insight Enrichment</h3>
+            <p>Adds derived fields and mapped labels that make the dataset more valuable for business analysis.</p>
+          </article>
+          <article class="service-card">
+            <h3>Client-Ready Structuring</h3>
+            <p>Shapes the final dataset and reporting outputs so delivery is coherent, traceable, and reusable.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="visuals">
+      <div class="container">
+        <div class="section-head">
+          <h2>Sample output visuals</h2>
+          <p>
+            These examples show how Sparkle turns a messy sample sales dataset
+            into cleaner, more usable business outputs.
+          </p>
+        </div>
+        <div class="visual-grid">
+          <article class="visual-card">
+            <img src="assets/sme_sales_before_messy_sample_dataset.png" alt="Messy SME sales sample dataset">
+            <div class="visual-meta">
+              <h3>Before cleanup</h3>
+              <p>Raw operational records with inconsistent values, duplicates, and format issues.</p>
+            </div>
+          </article>
+          <article class="visual-card">
+            <img src="assets/sme_sales_after_cleaned_sample_dataset_style_compare.png" alt="Cleaned SME sales sample dataset">
+            <div class="visual-meta">
+              <h3>After operational cleanup</h3>
+              <p>Normalized outputs with cleaner identifiers, standardized business fields, and delivery-ready presentation.</p>
+            </div>
+          </article>
+          <article class="visual-card">
+            <img src="assets/sme_sales_validation_findings.png" alt="Validation findings sample">
+            <div class="visual-meta">
+              <h3>Validation findings</h3>
+              <p>Integrity checks make hidden data risk visible before reporting or delivery continues.</p>
+            </div>
+          </article>
+          <article class="visual-card">
+            <img src="assets/sme_sales_family_dashboard_facebook.png" alt="Sparkle family dashboard sample">
+            <div class="visual-meta">
+              <h3>Business-facing dashboard</h3>
+              <p>Family dashboards translate technical processing into business-readable insights and actions.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Built for trust</h2>
+          <p>
+            Sparkle is designed around traceability, controlled delivery, and
+            truthful outputs instead of decorative automation.
+          </p>
+        </div>
+        <div class="trust-grid">
+          <article class="trust-card">
+            <h3>Truth-first dashboards</h3>
+            <p>Operational and business dashboards are driven by real run evidence, not fabricated examples.</p>
+          </article>
+          <article class="trust-card">
+            <h3>Connected run journeys</h3>
+            <p>Shared run identity keeps cleaning, validation, enrichment, structuring, reporting, and delivery connected.</p>
+          </article>
+          <article class="trust-card">
+            <h3>Controlled publication</h3>
+            <p>Family and sector reporting are gated deliberately so final client artifacts appear only when the journey is ready.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-panel">
+          <div>
+            <h2>Sparkle makes datasets fit for business use.</h2>
+            <p>
+              Cleanup, validation, enrichment, and structuring should produce
+              outputs a team can trust, explain, and act on.
+            </p>
+            <div class="footer-note">Sparkle project by Team Meek</div>
+          </div>
+          <a class="button" href="https://github.com/Teammeek/sparkle">View the project</a>
+        </div>
+      </div>
+    </section>
   </main>
 </body>
 </html>
