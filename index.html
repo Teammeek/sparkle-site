@@ -6,12 +6,12 @@
   <title>Sparkle</title>
   <meta
     name="description"
-    content="Sparkle turns messy operational datasets into business-ready outputs through cleanup, validation, enrichment, and structuring."
+    content="Sparkle turns messy operational datasets into business-ready outputs through cleanup, validation, enrichment, and client-ready structuring."
   >
   <style>
     :root {
       --ink: #0f172a;
-      --muted: #516074;
+      --muted: #526172;
       --teal: #1d8f8a;
       --teal-dark: #136a66;
       --mint: rgba(157, 223, 217, 0.86);
@@ -20,38 +20,25 @@
       --card: #ffffff;
       --line: #d9e2ec;
       --navy: #101a31;
+      --soft: #edf5f6;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
       background: linear-gradient(180deg, #fbfdff 0%, #f6f8fb 42%, #eef4f7 100%);
       color: var(--ink);
     }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    a {
-      color: inherit;
-    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
 
     .page {
       position: relative;
       overflow: hidden;
       min-height: 100vh;
     }
-
     .circle-a,
     .circle-b {
       position: absolute;
@@ -59,7 +46,6 @@
       pointer-events: none;
       z-index: 0;
     }
-
     .circle-a {
       width: 380px;
       height: 380px;
@@ -67,7 +53,6 @@
       right: 84px;
       background: var(--mint);
     }
-
     .circle-b {
       width: 280px;
       height: 280px;
@@ -83,8 +68,9 @@
       z-index: 1;
     }
 
-    .hero {
-      padding: 34px 0 54px;
+    .hero,
+    .section {
+      padding: 34px 0;
     }
 
     .brand {
@@ -96,7 +82,7 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
       gap: 28px;
       align-items: center;
     }
@@ -125,13 +111,14 @@
 
     .hero-copy {
       margin: 22px 0 0;
-      max-width: 600px;
+      max-width: 640px;
       color: var(--muted);
       font-size: 1.1rem;
       line-height: 1.72;
     }
 
-    .hero-actions {
+    .hero-actions,
+    .cta-actions {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
@@ -168,11 +155,21 @@
       transform: translateY(-1px);
     }
 
+    .hero-panel,
+    .service-card,
+    .proof-card,
+    .audience-card,
+    .step-card,
+    .trust-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.06);
+    }
+
     .hero-panel {
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid rgba(217, 226, 236, 0.9);
-      border-radius: 28px;
       padding: 24px;
+      background: rgba(255, 255, 255, 0.84);
       backdrop-filter: blur(12px);
       box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
     }
@@ -202,12 +199,8 @@
     }
 
     .signal strong {
-      font-size: 1.05rem;
-      line-height: 1.5;
-    }
-
-    .section {
-      padding: 34px 0;
+      font-size: 1.02rem;
+      line-height: 1.52;
     }
 
     .section-head {
@@ -226,95 +219,90 @@
 
     .section-head p {
       margin: 0;
-      max-width: 560px;
+      max-width: 580px;
       color: var(--muted);
       line-height: 1.7;
     }
 
-    .service-grid {
+    .service-grid,
+    .audience-grid,
+    .step-grid,
+    .trust-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 18px;
     }
 
-    .service-card,
-    .visual-card,
-    .trust-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.06);
+    .service-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
-    .service-card {
+    .audience-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .step-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .trust-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .service-card,
+    .audience-card,
+    .step-card,
+    .trust-card {
       padding: 22px;
     }
 
-    .service-card h3 {
+    .service-card h3,
+    .audience-card h3,
+    .step-card h3,
+    .trust-card h3 {
       margin: 0 0 10px;
-      font-size: 1.06rem;
+      font-size: 1.04rem;
     }
 
-    .service-card p {
+    .service-card p,
+    .audience-card p,
+    .step-card p,
+    .trust-card p {
       margin: 0;
       color: var(--muted);
-      line-height: 1.65;
+      line-height: 1.66;
       font-size: 0.98rem;
     }
 
-    .visual-grid {
+    .proof-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
     }
 
-    .visual-card {
+    .proof-card {
       overflow: hidden;
     }
 
-    .visual-card img {
+    .proof-card img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
       background: #eef4f7;
     }
 
-    .visual-meta {
+    .proof-meta {
       padding: 16px 18px 18px;
       border-top: 1px solid var(--line);
     }
 
-    .visual-meta h3 {
+    .proof-meta h3 {
       margin: 0 0 6px;
       font-size: 1rem;
     }
 
-    .visual-meta p {
+    .proof-meta p {
       margin: 0;
       color: var(--muted);
       font-size: 0.94rem;
       line-height: 1.6;
-    }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .trust-card {
-      padding: 22px;
-    }
-
-    .trust-card h3 {
-      margin: 0 0 8px;
-      font-size: 1rem;
-    }
-
-    .trust-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.66;
     }
 
     .cta {
@@ -326,10 +314,6 @@
       color: #fff;
       border-radius: 28px;
       padding: 34px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
       box-shadow: 0 22px 40px rgba(16, 26, 49, 0.22);
     }
 
@@ -341,23 +325,24 @@
 
     .cta-panel p {
       margin: 0;
-      color: rgba(255, 255, 255, 0.82);
+      color: rgba(255, 255, 255, 0.84);
       line-height: 1.7;
-      max-width: 560px;
+      max-width: 720px;
     }
 
     .footer-note {
-      margin-top: 18px;
-      color: rgba(255, 255, 255, 0.7);
+      margin-top: 16px;
+      color: rgba(255, 255, 255, 0.72);
       font-size: 0.92rem;
+      line-height: 1.6;
     }
 
     @media (max-width: 980px) {
       .hero-grid,
       .service-grid,
-      .trust-grid,
-      .visual-grid,
-      .cta-panel {
+      .audience-grid,
+      .step-grid,
+      .trust-grid {
         grid-template-columns: 1fr;
       }
 
@@ -413,14 +398,15 @@
         <div class="hero-grid">
           <div>
             <div class="eyebrow">Business-ready data operations</div>
-            <h1>From messy operational data to decision-ready outputs.</h1>
+            <h1>Messy operational data should not be running your business.</h1>
             <p class="hero-copy">
-              Sparkle cleans inconsistent records, flags integrity risk,
-              enriches business meaning, and structures delivery-grade datasets
-              and dashboards for real business use.
+              Sparkle cleans inconsistent records, validates data integrity,
+              enriches business meaning, and structures final outputs your team
+              can actually use for reporting, review, and delivery.
             </p>
             <div class="hero-actions">
-              <a class="button" href="#visuals">See sample outputs</a>
+              <a class="button" href="#proof">See sample outputs</a>
+              <a class="button-secondary" href="https://wa.me/2349028878850">WhatsApp Sparkle</a>
               <a class="button-secondary" href="mailto:sparkledata001@gmail.com">Email Sparkle</a>
             </div>
           </div>
@@ -429,20 +415,20 @@
             <h2>What Sparkle delivers</h2>
             <div class="signal-list">
               <div class="signal">
-                <span>Cleanup</span>
+                <span>Operational Data Cleanup</span>
                 <strong>Standardized values, corrected formats, and duplicate-safe outputs.</strong>
               </div>
               <div class="signal">
-                <span>Validation</span>
-                <strong>Integrity findings that separate quality issues from trusted records.</strong>
+                <span>Data Validation &amp; Integrity Checks</span>
+                <strong>Integrity findings that separate weak inputs from trusted records.</strong>
               </div>
               <div class="signal">
-                <span>Enrichment</span>
-                <strong>Business insight fields that make the dataset more useful for reporting.</strong>
+                <span>Business Insight Enrichment</span>
+                <strong>Derived fields and mapped labels that make the dataset more useful for decisions.</strong>
               </div>
               <div class="signal">
-                <span>Contact</span>
-                <strong>Request Sparkle via WhatsApp onboarding or email at sparkledata001@gmail.com.</strong>
+                <span>Client-Ready Structuring</span>
+                <strong>Delivery-grade datasets and dashboards aligned to the final business journey.</strong>
               </div>
             </div>
           </aside>
@@ -450,81 +436,137 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="services">
       <div class="container">
         <div class="section-head">
-          <h2>Service flow</h2>
+          <h2>Services</h2>
           <p>
-            Sparkle is designed as a connected operational journey, not a loose
-            collection of scripts. Each stage moves the dataset closer to a
-            business-ready outcome.
+            Sparkle is a service-led data workflow for teams that need their
+            operational datasets cleaned, checked, enriched, and prepared for
+            serious business use.
           </p>
         </div>
         <div class="service-grid">
           <article class="service-card">
             <h3>Operational Data Cleanup</h3>
-            <p>Fixes whitespace, dates, identifiers, mapped values, and duplicate-heavy rows without inventing data.</p>
+            <p>Fixes dates, identifiers, mapped values, blanks, duplicates, and presentation-level inconsistency without inventing data.</p>
           </article>
           <article class="service-card">
             <h3>Data Validation &amp; Integrity Checks</h3>
-            <p>Flags errors, warnings, and review-needed records so weak inputs do not quietly pass into reporting.</p>
+            <p>Flags errors, warnings, and review-needed records so bad data does not quietly move downstream.</p>
           </article>
           <article class="service-card">
             <h3>Business Insight Enrichment</h3>
-            <p>Adds derived fields and mapped labels that make the dataset more valuable for business analysis.</p>
+            <p>Adds derived columns and mapped business labels that improve analysis, segmentation, and reporting usefulness.</p>
           </article>
           <article class="service-card">
             <h3>Client-Ready Structuring</h3>
-            <p>Shapes the final dataset and reporting outputs so delivery is coherent, traceable, and reusable.</p>
+            <p>Shapes the final output into a cleaner delivery package with business-facing dashboards and structured datasets.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="visuals">
+    <section class="section" id="who">
       <div class="container">
         <div class="section-head">
-          <h2>Sample output visuals</h2>
+          <h2>Who Sparkle is for</h2>
           <p>
-            These examples show how Sparkle turns a messy sample sales dataset
-            into cleaner, more usable business outputs.
+            Sparkle is built for teams that depend on operational spreadsheets
+            and CSVs but need clearer data before reporting, review, or client delivery.
           </p>
         </div>
-        <div class="visual-grid">
-          <article class="visual-card">
+        <div class="audience-grid">
+          <article class="audience-card">
+            <h3>SMEs and operators</h3>
+            <p>Sales, customer, inventory, procurement, and other operational datasets that need cleaning and business-ready structure.</p>
+          </article>
+          <article class="audience-card">
+            <h3>Schools and admin teams</h3>
+            <p>Fees, attendance, exams, and enrollment data that need integrity checks, review signals, and cleaner reporting outputs.</p>
+          </article>
+          <article class="audience-card">
+            <h3>Agro and production teams</h3>
+            <p>Production, field operations, inventory, and produce-sales data that need clarity before management decisions.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="proof">
+      <div class="container">
+        <div class="section-head">
+          <h2>Sample output proof</h2>
+          <p>
+            These are example Sparkle outputs from a sample SME sales journey,
+            showing the progression from messy inputs to business-facing outputs.
+          </p>
+        </div>
+        <div class="proof-grid">
+          <article class="proof-card">
             <img src="assets/sme_sales_before_messy_sample_dataset.png" alt="Messy SME sales sample dataset">
-            <div class="visual-meta">
+            <div class="proof-meta">
               <h3>Before cleanup</h3>
               <p>Raw operational records with inconsistent values, duplicates, and format issues.</p>
             </div>
           </article>
-          <article class="visual-card">
+          <article class="proof-card">
             <img src="assets/sme_sales_after_cleaned_sample_dataset.png" alt="Cleaned SME sales sample dataset">
-            <div class="visual-meta">
+            <div class="proof-meta">
               <h3>After operational cleanup</h3>
-              <p>Normalized outputs with cleaner identifiers, standardized business fields, and delivery-ready presentation.</p>
+              <p>Cleaner identifiers, normalized business fields, and a more usable working dataset.</p>
             </div>
           </article>
-          <article class="visual-card">
+          <article class="proof-card">
             <img src="assets/sme_sales_validation_findings.png" alt="Validation findings sample">
-            <div class="visual-meta">
+            <div class="proof-meta">
               <h3>Validation findings</h3>
-              <p>Integrity checks make hidden data risk visible before reporting or delivery continues.</p>
+              <p>Integrity findings make hidden risk visible before enrichment, reporting, or delivery continues.</p>
             </div>
           </article>
-          <article class="visual-card">
+          <article class="proof-card">
             <img src="assets/sme_sales_business_insight_enrichment.png" alt="Business insight enrichment sample">
-            <div class="visual-meta">
+            <div class="proof-meta">
               <h3>Business insight enrichment</h3>
-              <p>Derived columns and mapped labels make the dataset more valuable for business reading and reporting.</p>
+              <p>Derived columns and mapped labels make the dataset more valuable for real business reading.</p>
             </div>
           </article>
-          <article class="visual-card">
+          <article class="proof-card">
             <img src="assets/sme_sales_family_dashboard_real_sample.png" alt="Real Sparkle family dashboard output">
-            <div class="visual-meta">
+            <div class="proof-meta">
               <h3>Real family dashboard output</h3>
-              <p>This is the actual family dashboard output Sparkle produced from the sample journey, not a poster redesign.</p>
+              <p>This is the actual family dashboard Sparkle produced from the sample journey, not a promo redesign.</p>
             </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-head">
+          <h2>Delivery process</h2>
+          <p>
+            Sparkle is designed as a connected dataset journey so the final
+            output remains traceable, understandable, and useful.
+          </p>
+        </div>
+        <div class="step-grid">
+          <article class="step-card">
+            <h3>1. Intake</h3>
+            <p>You share the dataset and the business context around what the output needs to support.</p>
+          </article>
+          <article class="step-card">
+            <h3>2. Processing</h3>
+            <p>Sparkle cleans, validates, enriches, and structures the dataset in the right sequence for the job.</p>
+          </article>
+          <article class="step-card">
+            <h3>3. Review</h3>
+            <p>Weak records, integrity findings, and business-facing signals are surfaced clearly for follow-up.</p>
+          </article>
+          <article class="step-card">
+            <h3>4. Delivery</h3>
+            <p>You receive structured outputs and dashboards that are easier to trust, explain, and work with.</p>
           </article>
         </div>
       </div>
@@ -533,41 +575,44 @@
     <section class="section">
       <div class="container">
         <div class="section-head">
-          <h2>Built for trust</h2>
+          <h2>Why teams trust Sparkle</h2>
           <p>
-            Sparkle is designed around traceability, controlled delivery, and
-            truthful outputs instead of decorative automation.
+            Sparkle is built around controlled outputs, connected run journeys,
+            and evidence-led presentation instead of decorative automation.
           </p>
         </div>
         <div class="trust-grid">
           <article class="trust-card">
-            <h3>Truth-first dashboards</h3>
-            <p>Operational and business dashboards are driven by real run evidence, not fabricated examples.</p>
+            <h3>Truth-first outputs</h3>
+            <p>Dashboards and stage outputs are tied to actual runtime evidence, not invented examples.</p>
           </article>
           <article class="trust-card">
             <h3>Connected run journeys</h3>
-            <p>Shared run identity keeps cleaning, validation, enrichment, structuring, reporting, and delivery connected.</p>
+            <p>Cleanup, validation, enrichment, structuring, reporting, and delivery stay connected across the same job flow.</p>
           </article>
           <article class="trust-card">
             <h3>Controlled publication</h3>
-            <p>Family and sector reporting are gated deliberately so final client artifacts appear only when the journey is ready.</p>
+            <p>Client-facing artifacts appear only when the delivery journey has actually reached the right point.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="cta">
+    <section class="cta" id="request">
       <div class="container">
         <div class="cta-panel">
-          <div>
-            <h2>Sparkle makes datasets fit for business use.</h2>
-            <p>
-              Cleanup, validation, enrichment, and structuring should produce
-              outputs a team can trust, explain, and act on.
-            </p>
-            <div class="footer-note">WhatsApp and email onboarding available via sparkledata001@gmail.com</div>
+          <h2>Request Sparkle</h2>
+          <p>
+            If your team is working with messy operational spreadsheets or CSVs,
+            Sparkle can help turn them into cleaner, more usable business outputs.
+          </p>
+          <div class="cta-actions">
+            <a class="button" href="https://wa.me/2349028878850">WhatsApp 09028878850</a>
+            <a class="button-secondary" href="mailto:sparkledata001@gmail.com">sparkledata001@gmail.com</a>
           </div>
-          <a class="button" href="mailto:sparkledata001@gmail.com">Request Sparkle</a>
+          <div class="footer-note">
+            A request form would be for service inquiry later, not for user sign-up.
+          </div>
         </div>
       </div>
     </section>
